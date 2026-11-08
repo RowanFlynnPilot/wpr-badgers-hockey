@@ -40,10 +40,13 @@ Live URLs:
 
 ## Sales one-pager (printable)
 
-`docs/badgers-hockey-sponsorship.pdf` is a one-page US Letter sales sheet
+`public/badgers-hockey-sponsorship.pdf` — served at
+`https://rowanflynnpilot.github.io/wpr-badgers-hockey/badgers-hockey-sponsorship.pdf`
+— is a one-page US Letter sales sheet
 for the sales desk: live rankings/records, games left, the placements with
 Open/Sold status, the big dates ahead, and a QR code to the media kit.
-Regenerate a fresh copy any time (figures are dated as of printing):
+Regenerate a fresh copy any time (figures are dated as of printing), then
+push so the hosted link updates:
 
 ```powershell
 npm run one-pager

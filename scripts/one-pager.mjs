@@ -1,6 +1,7 @@
 // Prints the sales one-pager (one-pager.html) to a Letter PDF with live
 // numbers and a QR code to the hosted media kit. Run after a build:
-//   npm run one-pager            → docs/badgers-hockey-sponsorship.pdf
+//   npm run one-pager            → public/badgers-hockey-sponsorship.pdf
+// (served at …/wpr-badgers-hockey/badgers-hockey-sponsorship.pdf once pushed)
 // Rerun whenever Chris wants a fresh copy — rankings/records are as of the
 // moment it's printed (the sheet says so).
 import { mkdirSync } from 'fs'
@@ -9,9 +10,9 @@ import { preview } from 'vite'
 import { chromium } from 'playwright'
 import QRCode from 'qrcode'
 
-const OUT = fileURLToPath(new URL('../docs/badgers-hockey-sponsorship.pdf', import.meta.url))
+const OUT = fileURLToPath(new URL('../public/badgers-hockey-sponsorship.pdf', import.meta.url))
 const KIT = 'https://rowanflynnpilot.github.io/wpr-badgers-hockey/sponsors.html'
-mkdirSync(fileURLToPath(new URL('../docs/', import.meta.url)), { recursive: true })
+mkdirSync(fileURLToPath(new URL('../public/', import.meta.url)), { recursive: true })
 
 const server = await preview({ preview: { port: 4174, strictPort: false, host: '127.0.0.1' } })
 const base = server.resolvedUrls.local[0]
