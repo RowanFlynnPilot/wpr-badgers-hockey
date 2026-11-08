@@ -293,3 +293,10 @@
     gap: 2px;
   }
 }
+
+/* Season charts — one per program, stacked full width (each needs the
+   width: 30-plus bars apiece). */
+.sp-charts {
+  display: grid;
+  gap: 12px;
+}

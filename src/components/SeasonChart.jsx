@@ -13,7 +13,10 @@ const W = 1000
 const H = 120
 const PAD = 4
 
-export default function SeasonChart({ schedule, rec, ranks }) {
+// `label` replaces "Game by game" in the resting readout (the media kit and
+// one-pager show one chart per program); `className` adds a variant
+// (sc--card: a standalone bordered card, sc--print: compact, no legend).
+export default function SeasonChart({ schedule, rec, ranks, label = 'Game by game', className = '' }) {
   const [active, setActive] = useState(null)
   if (!schedule || schedule.length < 2) return null
 
@@ -98,7 +101,7 @@ export default function SeasonChart({ schedule, rec, ranks }) {
   }
 
   return (
-    <div className="sc">
+    <div className={`sc ${className}`.trim()}>
       <div className="sc__readout" aria-live="polite">
         {shown ? (
           <>
@@ -106,7 +109,7 @@ export default function SeasonChart({ schedule, rec, ranks }) {
           </>
         ) : (
           <>
-            <span className="sc__num">Game by game</span> {summary}
+            <span className="sc__num">{label}</span> {summary}
           </>
         )}
       </div>

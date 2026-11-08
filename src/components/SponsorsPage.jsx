@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { CONFIG } from '../config.js'
 import { useInquiry } from '../useInquiry.js'
 import { gameDate, vsAt } from '../format.js'
-import { PROGRAMS, INVENTORY, loadPitchData, pitchNumbers, marquee } from '../pitch.js'
+import { INVENTORY, loadPitchData, pitchNumbers, marquee, chartPrograms } from '../pitch.js'
 import Masthead from './Masthead.jsx'
+import SeasonChart from './SeasonChart.jsx'
 
 // The hosted media kit (sponsors.html) — the one URL WPR sales sends.
 // Everything a buyer reads is LIVE: rankings, records, games left and the
@@ -60,6 +61,7 @@ export default function SponsorsPage() {
   ].filter(Boolean)
 
   const moments = marquee(data)
+  const charts = chartPrograms(data)
   const reporting = Boolean(CONFIG.ANALYTICS.domain)
 
   return (
@@ -100,6 +102,21 @@ export default function SponsorsPage() {
               </div>
             ))}
           </div>
+        )}
+
+        {charts.length > 0 && (
+          <section className="section">
+            <h2 className="section__title">Two seasons, game by game</h2>
+            <p className="section__sub">
+              Every bar is a game, live from the tracker. Everything to the right of the ring is still
+              to play, and that's where your brand rides along. Hover or tap any game.
+            </p>
+            <div className="sp-charts">
+              {charts.map(({ team, ...props }) => (
+                <SeasonChart key={team} {...props} className="sc--card" />
+              ))}
+            </div>
+          </section>
         )}
 
         {moments.length > 0 && (

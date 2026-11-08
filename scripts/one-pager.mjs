@@ -39,11 +39,17 @@ try {
   await page.waitForLoadState('networkidle')
   await page.evaluate(() => document.fonts.ready)
 
-  // Guard: the sheet must fit one page.
-  const overflow = await page.evaluate(() => {
-    const op = document.querySelector('.op')
-    return op.scrollHeight - op.clientHeight
-  })
+  // Guard: the sheet must fit one page — and the two columns must fit their
+  // own box (they flex to fill the page, so they overflow INTO the rows
+  // below them without ever overflowing the sheet).
+  const overflow = await page.evaluate(() =>
+    Math.max(
+      ...['.op', '.op-cols'].map((sel) => {
+        const el = document.querySelector(sel)
+        return el.scrollHeight - el.clientHeight
+      }),
+    ),
+  )
   if (overflow > 0) throw new Error(`One-pager overflows its page by ${overflow}px`)
 
   await page.pdf({ path: OUT, format: 'Letter', printBackground: true, preferCSSPageSize: true })

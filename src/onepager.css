@@ -31,7 +31,7 @@ body {
   border-bottom: 4px solid var(--ink);
   padding-bottom: 6px;
   box-shadow: 0 3px 0 var(--cream), 0 4px 0 var(--ink);
-  margin-bottom: 12px;
+  margin-bottom: 9px;
 }
 
 .op-flag {
@@ -61,7 +61,7 @@ body {
 .op-band {
   background: var(--cardinal);
   color: var(--white);
-  padding: 18px 22px 18px;
+  padding: 14px 22px 15px;
 }
 
 .op-kicker {
@@ -76,9 +76,9 @@ body {
 .op-band h1 {
   font-family: var(--display);
   font-weight: 900;
-  font-size: 36px;
+  font-size: 33px;
   line-height: 1.02;
-  margin: 6px 0 8px;
+  margin: 5px 0 7px;
 }
 
 .op-band p {
@@ -99,14 +99,14 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
-  margin: 14px 0;
+  margin: 10px 0;
 }
 
 .op-stat {
   background: var(--white);
   border: 1.5px solid var(--ink);
   border-left: 4px solid var(--cardinal);
-  padding: 9px 11px;
+  padding: 7px 11px;
 }
 
 .op-stat__num {
@@ -142,7 +142,7 @@ body {
 }
 
 .op-place {
-  padding: 7px 0;
+  padding: 5px 0;
   border-bottom: 1px solid var(--line);
 }
 
@@ -196,7 +196,7 @@ body {
   display: grid;
   grid-template-columns: 52px 1fr;
   gap: 8px;
-  padding: 6px 0;
+  padding: 4px 0;
   border-bottom: 1px solid var(--line);
 }
 
@@ -224,7 +224,7 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  margin-top: 12px;
+  margin-top: 10px;
   background: var(--white);
   border: 1.5px solid var(--ink);
   border-top: 5px solid var(--cardinal);
@@ -309,8 +309,8 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  margin-top: 14px;
-  padding-top: 12px;
+  margin-top: 10px;
+  padding-top: 9px;
   border-top: 2px solid var(--ink);
 }
 
@@ -327,4 +327,23 @@ body {
   font-size: 11px;
   line-height: 1.5;
   color: var(--ink-soft);
+}
+
+/* Season charts — the two programs side by side under the stat tiles. */
+.op-charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: -2px 0 10px;
+}
+
+.op-charts__key {
+  grid-column: 1 / -1;
+  font-size: 9px;
+  color: var(--ink-soft);
+  margin-top: -2px;
+}
+
+.op .sc--print .sc__plot {
+  height: 42px;
 }

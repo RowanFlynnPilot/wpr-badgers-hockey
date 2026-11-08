@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { CONFIG } from '../config.js'
 import { gameDate, vsAt } from '../format.js'
-import { INVENTORY, loadPitchData, pitchNumbers, marquee } from '../pitch.js'
+import { INVENTORY, loadPitchData, pitchNumbers, marquee, chartPrograms } from '../pitch.js'
+import SeasonChart from './SeasonChart.jsx'
 
 // The printable one-pager (one-pager.html): one US Letter sheet for the
 // sales desk to print or attach. Same live numbers as sponsors.html
@@ -14,7 +15,8 @@ export default function OnePager() {
 
   const { loaded, total, left, homeLeft, programs } = pitchNumbers(data)
   const pollsIn = programs.length === 2 && programs.every((p) => data[p.team].poll !== undefined)
-  const moments = marquee(data, 6)
+  const moments = marquee(data, 5)
+  const charts = chartPrograms(data)
   const ready = loaded && pollsIn
   const asOf = new Date().toLocaleDateString('en-US', {
     month: 'long',
@@ -64,6 +66,18 @@ export default function OnePager() {
         </div>
       </section>
 
+      {charts.length > 0 && (
+        <section className="op-charts">
+          {charts.map(({ team, ...props }) => (
+            <SeasonChart key={team} {...props} className="sc--print" />
+          ))}
+          <div className="op-charts__key">
+            Each bar is a game: up for a win, down for a loss, height = goal margin. Light cardinal
+            marks a home date still to come.
+          </div>
+        </section>
+      )}
+
       <div className="op-cols">
         <section>
           <h2>The placements</h2>
@@ -78,11 +92,6 @@ export default function OnePager() {
               <p>{item.print}</p>
             </div>
           ))}
-          <div className="op-also">
-            <strong>Every placement</strong> is click-tracked on its own, carries your
-            campaign tags into your own analytics, and runs with no cookies or consent
-            banners between readers and your brand.
-          </div>
         </section>
 
         <section>

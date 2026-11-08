@@ -680,6 +680,42 @@ input:focus-visible {
   height: 4px;
 }
 
+/* Standalone card (media kit): its own top border, not hung off the hero. */
+.sc--card {
+  border-top: 1.5px solid var(--ink);
+}
+
+/* Print (one-pager): compact and static — a picture, so no legend (the
+   sheet captions it once) and no pointer affordance. */
+.sc--print {
+  border-top: 1.5px solid var(--ink);
+  border-left: 4px solid var(--cardinal);
+  padding: 7px 10px 4px;
+}
+
+.sc--print .sc__readout {
+  font-size: 10.5px;
+  min-height: 0;
+}
+
+.sc--print .sc__num {
+  font-size: 9px;
+}
+
+.sc--print .sc__plot {
+  height: 54px;
+  margin-top: 4px;
+  cursor: default;
+}
+
+.sc--print .sc__months span {
+  font-size: 8px;
+}
+
+.sc--print .sc__legend {
+  display: none;
+}
+
 /* ----------------------------------------------------- storylines extras */
 .story__big {
   font-family: var(--display);

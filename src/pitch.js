@@ -62,6 +62,20 @@ export function pitchNumbers(data) {
   return { loaded, total: all.length, left: left.length, homeLeft, programs }
 }
 
+// Props for one SeasonChart per program, in toggle order.
+export function chartPrograms(data) {
+  return PROGRAMS.filter((t) => data[t] && data[t].schedule).map((team) => {
+    const { schedule, poll } = data[team]
+    return {
+      team,
+      label: `${CONFIG.TEAMS[team].label} hockey`,
+      schedule,
+      rec: records(schedule, null),
+      ranks: new Map(((poll && poll.ranks) || []).map((r) => [r.teamId, r.current])),
+    }
+  })
+}
+
 // Upcoming games worth attaching a brand to: named events (the Frozen
 // Tundra Faceoff at Lambeau, holiday tournaments), rivalry games, ranked
 // opponents. Named events always make the list; the soonest others fill it.
