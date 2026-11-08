@@ -238,3 +238,58 @@
   color: var(--ink-soft);
   margin-top: 10px;
 }
+
+/* The big dates ahead — computed marquee games (SponsorsPage marquee()). */
+.sp-moments {
+  display: grid;
+  gap: 8px;
+}
+
+.sp-moment {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 14px;
+  align-items: center;
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  border-left: 4px solid var(--cardinal);
+  padding: 10px 14px;
+}
+
+.sp-moment__date {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--cardinal);
+  text-transform: uppercase;
+}
+
+.sp-moment__what {
+  font-weight: 700;
+}
+
+.sp-moment__why {
+  display: inline-block;
+  margin-left: 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cardinal);
+  border: 1px solid rgba(197, 5, 12, 0.45);
+  border-radius: 3px;
+  padding: 1px 6px;
+  vertical-align: 2px;
+}
+
+.sp-moment__where {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 560px) {
+  .sp-moment {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
