@@ -1,0 +1,1165 @@
+:root {
+  --cardinal: #c5050c;
+  --cream: #f6f2e9;
+  --ink: #1f1a17;
+  --ink-soft: rgba(31, 26, 23, 0.62);
+  --line: rgba(31, 26, 23, 0.14);
+  --white: #ffffff;
+  --win: #2e7d46;
+  --loss: #b3261e;
+  --teal: #3a867c;
+  --display: 'Fraunces', georgia, serif;
+  --body: 'Public Sans', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 16px 40px;
+}
+
+/* The header wrap ends at the banner so the bleacher stripe sits flush
+   under it — one band, not a detached divider. */
+.wrap--head {
+  padding-bottom: 0;
+}
+
+/* ------------------------------------------------------------- masthead */
+/* The paper's newspaper-style header, shared with the Brewers tracker:
+   press seal + wordmark, tagline, dateline. */
+.masthead {
+  padding: 18px 0 10px;
+  border-bottom: 3px solid var(--ink);
+  text-align: center;
+}
+
+.masthead__home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  max-width: 92%;
+  text-decoration: none;
+}
+
+/* The paper's typewriter press seal, beside the wordmark. */
+.masthead__badge {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+.masthead__wordmark {
+  max-height: 56px;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  min-width: 0;
+}
+
+/* Set-type stand-in when the hosted wordmark image can't load. */
+.masthead__textmark {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 26px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.masthead__tag {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 8px;
+}
+
+.masthead__dateline {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
+.masthead__place {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* --------------------------------------------------------------- banner */
+.banner {
+  background: var(--cardinal);
+  color: var(--white);
+  padding: 22px 20px 18px;
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap; /* lets the sponsor slot drop to its own row on phones */
+}
+
+.banner__logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+
+.banner__kicker {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.banner__title {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(24px, 4.5vw, 34px);
+  line-height: 1.05;
+  margin: 2px 0 0;
+}
+
+/* Title sponsor lockup — the Packers/Brewers banner card: a white card
+   (sponsor art is drawn for white) on its own full-width row under the
+   title. Never hidden on phones; the row just wraps. */
+.sponsorlockup {
+  flex-basis: 100%;
+  display: block;
+  padding: 10px 18px 12px;
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.sponsorlockup__eyebrow {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cardinal);
+}
+
+.sponsorlockup__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  margin-top: 6px;
+}
+
+.sponsorlockup__row > img {
+  display: block;
+  height: 50px;
+  width: auto;
+}
+
+.sponsorlockup__name {
+  font-family: var(--display);
+  font-size: 20px;
+}
+
+.sponsorlockup__tagline {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.sponsorlockup__offer {
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.sponsorlockup__place {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.sponsorlockup__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin-left: auto;
+}
+
+.sponsorlockup__directions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border: 1.5px solid var(--cardinal);
+  border-radius: 16px;
+  font-size: 11.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.sponsorlockup__directions svg {
+  fill: var(--cardinal);
+}
+
+.sponsorlockup__directions:hover {
+  background: rgba(197, 5, 12, 0.06);
+}
+
+.sponsorlockup__directions:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+.sponsorlockup__cta {
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--cardinal);
+}
+
+a.sponsorlockup:hover .sponsorlockup__cta {
+  text-decoration: underline;
+}
+
+/* Sponsor band under the Schedule slate. */
+.sponsorband {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.sponsorband img {
+  height: 20px;
+  width: auto;
+}
+
+a.sponsorband:hover {
+  color: var(--cardinal);
+}
+
+/* Camp Randall bleacher stripe — the signature motif. */
+.stripe {
+  height: 10px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--cardinal) 0 26px,
+    var(--white) 26px 52px
+  );
+  border-bottom: 1px solid var(--line);
+}
+
+/* ---------------------------------------------------------------- topbar */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* three chips + the stamp share one row only when it fits */
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.updated {
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.topbar__actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.chipbtn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* ------------------------------------------------------- program toggle */
+/* Men's / Women's: a solid ink segmented switch — it swaps the whole
+   tracker's data, so it must not read as one more cardinal section tab. */
+.programs {
+  display: flex;
+  margin-top: 16px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  padding: 3px;
+  background: var(--white);
+}
+
+.program {
+  flex: 1;
+  text-align: center;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 17px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.program input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.program.is-active {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.program:not(.is-active):hover {
+  background: var(--cream);
+}
+
+.program:has(input:focus-visible) {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------------ tabs */
+.tabbar {
+  display: flex;
+  gap: 8px;
+  padding: 14px 0 0;
+}
+
+.tab {
+  /* Equal thirds across the full row — a segmented nav, no dead space to
+     the right of a left-clustered cluster. */
+  flex: 1;
+  text-align: center;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 16px;
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.tab[aria-selected='true'] {
+  background: var(--cardinal);
+  border-color: var(--cardinal);
+  color: var(--white);
+}
+
+/* One focus treatment everywhere — keyboard users get the same teal ring
+   on tabs, links, buttons, roster groups and the copy-link field. */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+/* -------------------------------------------------------------- sections */
+.section {
+  margin-top: 34px;
+}
+
+.section__title {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 22px;
+  margin: 0 0 4px;
+}
+
+.section__sub {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+}
+
+/* ------------------------------------------------------------------ hero */
+.hero {
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  padding: 26px 24px;
+  margin-top: 24px;
+}
+
+.hero__kicker {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cardinal);
+}
+
+.hero__count {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(34px, 7vw, 58px);
+  line-height: 1;
+  margin: 8px 0 4px;
+}
+
+.hero__matchup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 14px 0 8px;
+  flex-wrap: wrap;
+}
+
+.hero__team {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.hero__team img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.hero__vs {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.hero__score {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.hero__meta {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.hero__live {
+  display: inline-block;
+  background: var(--loss);
+  color: var(--white);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+
+.rankchip {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--cardinal);
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------ storylines */
+.stories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 10px;
+}
+
+.story {
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  border-left: 4px solid var(--cardinal);
+  padding: 12px 14px;
+}
+
+.story__tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cardinal);
+  font-weight: 700;
+}
+
+.story__text {
+  font-size: 13.5px;
+  line-height: 1.5;
+  margin: 5px 0 0;
+}
+
+/* ---------------------------------------------------------- season strip */
+/* Twelve opponents, one glance: upcoming games rest on a neutral rule,
+   wins go green, losses red, a live game runs cardinal. */
+.seasonstrip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  padding: 10px 14px 8px;
+  margin-top: 10px;
+}
+
+.seasonstrip__game {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 4px;
+  border-bottom: 3px solid var(--line);
+}
+
+.seasonstrip__game img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.seasonstrip__abbr {
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 26px;
+}
+
+.seasonstrip__game--w {
+  border-bottom-color: var(--win);
+}
+
+.seasonstrip__game--l {
+  border-bottom-color: var(--loss);
+}
+
+.seasonstrip__game--live {
+  border-bottom-color: var(--cardinal);
+}
+
+/* ----------------------------------------------------------------- pulse */
+.pulse {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1.5px solid var(--ink);
+}
+
+.pulse__cell {
+  background: var(--white);
+  padding: 14px 12px;
+}
+
+.pulse__num {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.pulse__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+
+/* ----------------------------------------------------------------- table */
+/* Wide tables (roster, standings) scroll inside this on narrow screens
+   instead of forcing a horizontal scrollbar on the whole embed. */
+.tablewrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  font-size: 14px;
+}
+
+.table th {
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  font-weight: 600;
+  padding: 10px 10px 8px;
+  border-bottom: 1.5px solid var(--ink);
+}
+
+.table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.table tr:last-child td {
+  border-bottom: 0;
+}
+
+.table .num {
+  font-family: var(--mono);
+  font-size: 13px;
+  text-align: right;
+}
+
+.table th.num {
+  text-align: right;
+}
+
+.table__team {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.table__team img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.row--us {
+  background: rgba(197, 5, 12, 0.07);
+}
+
+.row--us .table__team {
+  color: var(--cardinal);
+}
+
+/* --------------------------------------------------------- hover feedback */
+/* Two tiers. Non-clickable content (schedule / storyline / leader cards and
+   the standings / AP rows) just tracks the pointer with a light cardinal
+   wash — no border shift, so it never masquerades as a button. Clickable
+   surfaces (newsroom cards, inactive tabs, the header chips, roster group
+   headers) get a stronger, actionable hover. Transitions are killed under
+   reduced motion by the global switch below. */
+.game,
+.story,
+.leader,
+.newscard,
+.chipbtn,
+.roster summary,
+.table--hover tbody tr {
+  transition: background-color 0.12s ease, border-color 0.12s ease,
+    color 0.12s ease;
+}
+
+.game:hover,
+.story:hover,
+.leader:hover,
+.table--hover tbody tr:hover {
+  background: rgba(197, 5, 12, 0.05);
+}
+
+/* The pinned Wisconsin row already carries a cardinal tint — deepen it on
+   hover so it still reads as hovered rather than washing out. */
+.table--hover .row--us:hover {
+  background: rgba(197, 5, 12, 0.12);
+}
+
+/* Clickable surfaces — an actionable hover. */
+.newscard:hover {
+  background: rgba(197, 5, 12, 0.05);
+  border-color: var(--cardinal);
+}
+
+/* Inactive tabs hint at the cardinal fill the active tab carries. */
+.tab:not([aria-selected='true']):hover {
+  background: rgba(197, 5, 12, 0.06);
+}
+
+.chipbtn:not(:disabled):hover {
+  border-color: var(--cardinal);
+  color: var(--cardinal);
+}
+
+.roster summary:hover {
+  background: rgba(197, 5, 12, 0.05);
+}
+
+/* -------------------------------------------------------------- schedule */
+.slate {
+  display: grid;
+  gap: 10px;
+}
+
+.game {
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.game__when {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.game__opp {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.game__opp img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.game__name {
+  font-weight: 700;
+}
+
+.game__venue {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.game__right {
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.game__result {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.game__result--w {
+  color: var(--win);
+}
+
+.game__result--l {
+  color: var(--loss);
+}
+
+.game__result--t {
+  color: var(--ink-soft);
+}
+
+/* ---------------------------------------------------- hockey additions */
+.linescore th.num,
+.linescore td.num {
+  width: 44px;
+  text-align: center;
+}
+
+.linescore__total {
+  font-weight: 700;
+}
+
+.pollmove {
+  font-size: 11px;
+  width: 44px;
+}
+
+.pollmove--up {
+  color: var(--win);
+}
+
+.pollmove--down {
+  color: var(--loss);
+}
+
+.emptynote {
+  margin-top: 28px;
+  padding: 16px 18px;
+  background: var(--white);
+  border: 1.5px dashed var(--line);
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.emptynote a {
+  color: var(--cardinal);
+  font-weight: 700;
+}
+
+.game--home {
+  border-left: 8px solid var(--cardinal);
+}
+
+.tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 1px 6px;
+  color: var(--ink-soft);
+  margin-left: 6px;
+  vertical-align: 2px;
+}
+
+/* Trophy games (the Axe, Heartland Trophy…) get the cardinal treatment. */
+.tag--trophy {
+  border-color: rgba(197, 5, 12, 0.45);
+  color: var(--cardinal);
+}
+
+/* --------------------------------------------------------------- leaders */
+.leaders {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.leader {
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  padding: 14px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.leader img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--cream);
+}
+
+.leader__cat {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
+
+.leader__name {
+  font-weight: 700;
+}
+
+.leader__val {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--cardinal);
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------------------- roster */
+.roster details {
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  margin-bottom: 10px;
+}
+
+.roster summary {
+  cursor: pointer;
+  font-weight: 700;
+  padding: 12px 16px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.roster summary::-webkit-details-marker {
+  display: none;
+}
+
+.roster summary .count {
+  font-family: var(--mono);
+  color: var(--ink-soft);
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.roster table {
+  border: 0;
+  border-top: 1.5px solid var(--ink);
+}
+
+/* Homegrown players — the local-paper angle. */
+.hometown--wi {
+  color: var(--cardinal);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------- last game */
+.scoring {
+  display: grid;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.play {
+  display: grid;
+  grid-template-columns: 28px 52px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.play img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.play__clock {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+
+.play__score {
+  font-family: var(--mono);
+  font-weight: 700;
+}
+
+.chart {
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  padding: 12px;
+  margin-top: 12px;
+}
+
+/* ---------------------------------------------------------------- status */
+.loading,
+.errorstate {
+  padding: 26px;
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 14px;
+  background: var(--white);
+  border: 1.5px dashed var(--line);
+}
+
+/* -------------------------------------------------------------- bookmark */
+.bookmark {
+  position: relative;
+}
+
+/* Shared pill button (bookmark + calendar). */
+.chipbtn {
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 12px;
+  background: transparent;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  padding: 5px 12px;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.bookmark__pop {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  padding: 14px;
+  width: 240px;
+  z-index: 10;
+  font-size: 13px;
+  box-shadow: 4px 4px 0 rgba(31, 26, 23, 0.12);
+}
+
+.bookmark__pop kbd {
+  font-family: var(--mono);
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 12px;
+}
+
+.bookmark__copy {
+  margin-top: 10px;
+  width: 100%;
+  font-weight: 700;
+  background: var(--cardinal);
+  color: var(--white);
+  border: 0;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.bookmark__url {
+  margin-top: 10px;
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 7px 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink);
+  background: var(--cream);
+}
+
+/* ---------------------------------------------------------------- footer */
+.footer {
+  margin-top: 44px;
+  padding-top: 14px;
+  border-top: 3px solid var(--ink);
+  font-size: 12px;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.footer__badge {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.footer p {
+  margin: 0 0 8px;
+}
+
+.footer__sponsorlink {
+  color: var(--cardinal);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.footer__sponsorlink:hover {
+  text-decoration: underline;
+}
+
+/* ---------------------------------------------------------- newsroom cards */
+.newsgrid {
+  display: grid;
+  /* min() keeps the track from overflowing viewports narrower than 340px */
+  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+  gap: 10px;
+}
+
+.newscard {
+  display: flex;
+  align-items: stretch;
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.newscard__img {
+  width: 132px;
+  min-height: 104px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-right: 1px solid var(--line);
+  background: var(--cream);
+}
+
+.newscard__body {
+  padding: 12px 14px;
+  min-width: 0;
+}
+
+.newscard__date {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.newscard__title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  margin-top: 3px;
+}
+
+.newscard:hover .newscard__title {
+  color: var(--cardinal);
+}
+
+.newscard__excerpt {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  margin: 6px 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .game {
+    grid-template-columns: 1fr auto;
+  }
+
+  .game__when {
+    grid-column: 1 / -1;
+  }
+
+  /* Wrapped strip rows: space-between scatters a short last row across the
+     full width — centered rows read as one ribbon. */
+  .seasonstrip {
+    justify-content: center;
+  }
+
+}
