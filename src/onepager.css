@@ -1,0 +1,330 @@
+/* Printable one-pager — one US Letter sheet. Colors and type come from the
+   tracker's own tokens (styles.css :root). */
+@page {
+  size: letter;
+  margin: 0;
+}
+
+html,
+body {
+  background: var(--cream);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.op {
+  width: 8.5in;
+  height: 11in;
+  margin: 0 auto;
+  padding: 0.42in 0.5in 0.36in;
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--body);
+  overflow: hidden;
+}
+
+/* Masthead: seal + wordmark, tagline, thick-over-thin newspaper rule. */
+.op-mast {
+  text-align: center;
+  border-bottom: 4px solid var(--ink);
+  padding-bottom: 6px;
+  box-shadow: 0 3px 0 var(--cream), 0 4px 0 var(--ink);
+  margin-bottom: 12px;
+}
+
+.op-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.op-flag img:first-child {
+  width: 50px;
+  height: 50px;
+}
+
+.op-wordmark {
+  height: 40px;
+  width: auto;
+}
+
+.op-tagline {
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+
+.op-band {
+  background: var(--cardinal);
+  color: var(--white);
+  padding: 18px 22px 18px;
+}
+
+.op-kicker {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.op-band h1 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 1.02;
+  margin: 6px 0 8px;
+}
+
+.op-band p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  max-width: 6.2in;
+}
+
+.op-stripe {
+  height: 9px;
+  background: repeating-linear-gradient(90deg, var(--cardinal) 0 22px, var(--white) 22px 44px);
+  border: 1px solid var(--line);
+  border-top: 0;
+}
+
+.op-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.op-stat {
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  border-left: 4px solid var(--cardinal);
+  padding: 9px 11px;
+}
+
+.op-stat__num {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--cardinal);
+}
+
+.op-stat__label {
+  font-size: 10.5px;
+  color: var(--ink-soft);
+  margin-top: 4px;
+  line-height: 1.35;
+}
+
+.op-cols {
+  display: grid;
+  grid-template-columns: 1.08fr 1fr;
+  gap: 20px;
+  flex: 1;
+  min-height: 0;
+}
+
+.op-cols h2 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 18px;
+  margin: 0 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.op-place {
+  padding: 7px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.op-place__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.op-place p {
+  margin: 3px 0 0;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.op-status {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--win);
+  border: 1px solid var(--win);
+  border-radius: 3px;
+  padding: 1px 6px;
+  flex-shrink: 0;
+}
+
+.op-status.is-sold {
+  color: var(--ink-soft);
+  border-color: var(--line);
+}
+
+.op-also {
+  margin-top: 10px;
+  font-size: 10.5px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.op-also strong {
+  color: var(--ink);
+}
+
+.op-moment {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.op-moment__date {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--cardinal);
+  text-transform: uppercase;
+  padding-top: 1px;
+}
+
+.op-moment__what {
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.op-moment__why {
+  font-size: 10.5px;
+  color: var(--ink-soft);
+}
+
+.op-contact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  border-top: 5px solid var(--cardinal);
+  padding: 12px 16px;
+}
+
+.op-contact__kicker {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cardinal);
+}
+
+.op-contact__name {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 20px;
+  margin: 2px 0 3px;
+}
+
+.op-contact__line {
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.op-qrwrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.op-qr {
+  width: 84px;
+  height: 84px;
+}
+
+.op-qr:empty {
+  display: none;
+}
+
+.op-qr svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.op-qrlabel {
+  font-size: 11px;
+  font-weight: 700;
+  max-width: 1.7in;
+  line-height: 1.35;
+}
+
+.op-qrlabel span {
+  display: block;
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: 8.5px;
+  color: var(--ink-soft);
+  margin-top: 3px;
+}
+
+.op-foot {
+  margin-top: 10px;
+  font-size: 8.5px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.op-nowrap {
+  display: block;
+  white-space: nowrap;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Why it works — three reasons to buy, filling the sheet's lower third. */
+.op-why {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 2px solid var(--ink);
+}
+
+.op-why h3 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 15px;
+  color: var(--cardinal);
+  margin: 0 0 4px;
+}
+
+.op-why p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}

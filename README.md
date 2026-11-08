@@ -38,6 +38,19 @@ Live URLs:
   the sales desk. Status reads live from `src/config.js`; append `?demo` to
   the tracker or a mini to preview open placements.
 
+## Sales one-pager (printable)
+
+`docs/badgers-hockey-sponsorship.pdf` is a one-page US Letter sales sheet
+for the sales desk: live rankings/records, games left, the placements with
+Open/Sold status, the big dates ahead, and a QR code to the media kit.
+Regenerate a fresh copy any time (figures are dated as of printing):
+
+```powershell
+npm run one-pager
+```
+
+The same sheet renders live at `…/wpr-badgers-hockey/one-pager.html`.
+
 ## Embed on WPR (WordPress Custom HTML block)
 
 **WPR's Cloudflare firewall blocks saving any post that contains a

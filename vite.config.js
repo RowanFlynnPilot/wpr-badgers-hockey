@@ -12,6 +12,7 @@ export default defineConfig({
         mini: resolve(__dirname, 'mini.html'),
         'mini-season': resolve(__dirname, 'mini-season.html'),
         sponsors: resolve(__dirname, 'sponsors.html'),
+        'one-pager': resolve(__dirname, 'one-pager.html'),
       },
       output: {
         // Without this, Rollup names the shared React chunk after an
