@@ -526,50 +526,242 @@ input:focus-visible {
   margin: 5px 0 0;
 }
 
-/* ---------------------------------------------------------- season strip */
-/* Twelve opponents, one glance: upcoming games rest on a neutral rule,
-   wins go green, losses red, a live game runs cardinal. */
-.seasonstrip {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: space-between;
+/* ---------------------------------------------------------- season chart */
+/* A column per game: bar height = goal margin, up for wins, down for
+   losses, a flat tick for ties. Stubs on the rule are games ahead. */
+.sc {
   background: var(--white);
   border: 1.5px solid var(--ink);
-  padding: 10px 14px 8px;
-  margin-top: 10px;
+  border-top: 0;
+  padding: 12px 16px 10px;
 }
 
-.seasonstrip__game {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 4px;
-  border-bottom: 3px solid var(--line);
+.sc__readout {
+  font-size: 13px;
+  min-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.seasonstrip__game img {
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
-}
-
-.seasonstrip__abbr {
+.sc__num {
   font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cardinal);
+  margin-right: 6px;
+}
+
+.sc__plot {
+  height: 120px;
+  margin-top: 8px;
+  cursor: crosshair;
+  touch-action: pan-y;
+}
+
+.sc__plot svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.sc-axis {
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+
+.sc-hover {
+  fill: rgba(197, 5, 12, 0.07);
+}
+
+.sc-bar--w {
+  fill: var(--win);
+}
+
+.sc-bar--l {
+  fill: var(--loss);
+}
+
+.sc-bar--t {
+  fill: var(--ink);
+}
+
+.sc-bar--pre {
+  fill: var(--line);
+}
+
+.sc-bar--home {
+  fill: rgba(197, 5, 12, 0.45);
+}
+
+.sc-bar--next {
+  fill: var(--white);
+  stroke: var(--cardinal);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.sc-bar--live {
+  fill: var(--cardinal);
+  animation: sc-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes sc-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.sc__months {
+  position: relative;
+  height: 16px;
+  border-top: 1px solid var(--line);
+  margin-top: 2px;
+}
+
+.sc__months span {
+  position: absolute;
+  top: 2px;
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  padding-left: 3px;
+  border-left: 1px solid var(--line);
+}
+
+.sc__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin-top: 8px;
   font-size: 11px;
-  line-height: 26px;
+  color: var(--ink-soft);
 }
 
-.seasonstrip__game--w {
-  border-bottom-color: var(--win);
+.sc__legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.seasonstrip__game--l {
-  border-bottom-color: var(--loss);
+.sc__legendnote {
+  margin-left: auto;
 }
 
-.seasonstrip__game--live {
-  border-bottom-color: var(--cardinal);
+.sc-key {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+}
+
+.sc-key--w {
+  background: var(--win);
+}
+
+.sc-key--l {
+  background: var(--loss);
+}
+
+.sc-key--t {
+  background: var(--ink);
+  height: 3px;
+}
+
+.sc-key--next {
+  border: 2px solid var(--cardinal);
+}
+
+.sc-key--home {
+  background: rgba(197, 5, 12, 0.45);
+  height: 4px;
+}
+
+/* ----------------------------------------------------- storylines extras */
+.story__big {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 1.1;
+  margin-top: 4px;
+}
+
+/* The "meanwhile" card switches programs: a real button, styled as a card
+   with an actionable hover. */
+.story--switch {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border-left-color: var(--ink);
+}
+
+.story--switch:hover {
+  border-color: var(--cardinal);
+}
+
+.story__go {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cardinal);
+}
+
+/* -------------------------------------------------------------- goal flash */
+.hero--live {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__goal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(30px, 7vw, 54px);
+  color: var(--white);
+  background: var(--cardinal);
+  animation: goal 6s ease forwards;
+  pointer-events: none;
+}
+
+.hero--goal-them .hero__goal {
+  background: var(--ink);
+}
+
+@keyframes goal {
+  0% {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  6%,
+  55% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Reduced motion: the global switch kills the animation, so hold the
+   banner briefly as a plain label instead of a full-cover flash. */
+@media (prefers-reduced-motion: reduce) {
+  .hero__goal {
+    position: static;
+    font-size: 18px;
+    padding: 6px 10px;
+    margin: -10px 0 12px;
+  }
 }
 
 /* ----------------------------------------------------------------- pulse */
@@ -1242,10 +1434,24 @@ input:focus-visible {
     gap: 8px;
   }
 
-  /* Wrapped strip rows: space-between scatters a short last row across the
-     full width — centered rows read as one ribbon. */
-  .seasonstrip {
-    justify-content: center;
+  .sc__plot {
+    height: 96px;
+  }
+
+  /* Two lines reserved so hovering never shifts the chart. */
+  .sc__readout {
+    white-space: normal;
+    min-height: 40px;
+  }
+
+  .hero__matchup {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .sc__legendnote {
+    margin-left: 0;
   }
 
 }

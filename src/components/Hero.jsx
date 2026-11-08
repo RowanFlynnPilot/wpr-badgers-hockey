@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { CONFIG } from '../config.js'
 import { gameDate, gameTime, liveLabel, resultLine, vsAt } from '../format.js'
 import { fmt } from '../record.js'
@@ -46,6 +46,29 @@ function TeamChip({ team }) {
   )
 }
 
+// A goal between polls lights the live hero for a few seconds and names the
+// scorer. Only score CHANGES on a game already being watched count — opening
+// the page mid-game doesn't fire a stale "goal".
+function useGoalFlash(live) {
+  const seen = useRef({})
+  const [goal, setGoal] = useState(null)
+  const key = live ? `${live.id}:${live.us.score}-${live.them.score}` : null
+  useEffect(() => {
+    if (!live) return
+    const prev = seen.current[live.id]
+    seen.current[live.id] = { us: live.us.score, them: live.them.score }
+    if (!prev) return
+    const side = live.us.score > prev.us ? 'us' : live.them.score > prev.them ? 'them' : null
+    if (side) setGoal({ side, key })
+  }, [key])
+  useEffect(() => {
+    if (!goal) return
+    const id = setTimeout(() => setGoal(null), 6000)
+    return () => clearTimeout(id)
+  }, [goal])
+  return live && goal ? goal : null
+}
+
 export default function Hero({ team, schedule, ourRank, rec }) {
   // Re-render every minute so the countdown stays honest.
   const [, setTick] = useState(0)
@@ -56,13 +79,19 @@ export default function Hero({ team, schedule, ourRank, rec }) {
 
   const program = CONFIG.TEAMS[team]
   const live = schedule.find((g) => g.state === 'in')
+  const goal = useGoalFlash(live)
   const next = schedule.find((g) => g.state === 'pre')
   const last = [...schedule].reverse().find((g) => g.completed)
   const us = (g) => ({ ...g.us, name: `Wisconsin ${program.label}`, rank: ourRank || g.us.rank })
 
   if (live) {
     return (
-      <div className="hero">
+      <div className={`hero hero--live${goal ? ` hero--goal-${goal.side}` : ''}`}>
+        {goal && (
+          <div className="hero__goal" role="status" key={goal.key}>
+            Goal, {goal.side === 'us' ? 'Wisconsin' : live.them.short}!
+          </div>
+        )}
         <div className="hero__kicker">
           <span className="hero__live">Live</span> {liveLabel(live)}
           {live.note && ` · ${live.note}`}

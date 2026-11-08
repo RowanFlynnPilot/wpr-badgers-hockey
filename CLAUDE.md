@@ -26,6 +26,14 @@ src/record.js    ← Wisconsin's W–L–T / conference / home / road / streak,
 src/format.js    ← dates (TBA-in-Eastern rule), periods (1st/2nd/3rd/OT),
                    live and result lines
 src/App.jsx      ← polls BOTH programs every 60s; ProgramToggle + 3 tabs
+src/components/SeasonChart.jsx ← goal-margin bar per game under the hero
+                   (hover/tap/arrow keys name the game; axis placed by
+                   the data, so an unbeaten team uses the full height)
+src/components/Storylines.jsx  ← auto-written cards from live feeds: three
+                   about this program + a "Meanwhile" card that switches
+                   to the other one. No editorial upkeep.
+Hero.jsx         ← live hero flashes "Goal, X!" when the score changes
+                   between polls (never on first load mid-game)
 mini.html        ← game card: one game across both programs (?team= pins)
 mini-season.html ← both programs side by side
 sponsors.html    ← media kit; ?demo fills open sponsor slots

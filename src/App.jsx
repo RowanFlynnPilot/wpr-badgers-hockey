@@ -16,6 +16,8 @@ import Standings from './components/Standings.jsx'
 import Rankings from './components/Rankings.jsx'
 import Schedule from './components/Schedule.jsx'
 import LastGame from './components/LastGame.jsx'
+import SeasonChart from './components/SeasonChart.jsx'
+import Storylines from './components/Storylines.jsx'
 import Roster from './components/Roster.jsx'
 import Coverage from './components/Coverage.jsx'
 import { Loading, ErrorState } from './components/Status.jsx'
@@ -111,6 +113,8 @@ export default function App() {
   const ourRank = poll
     ? (poll.ranks.find((r) => r.teamId === CONFIG.TEAM_ID) || {}).current || null
     : null
+  const pollRanks = new Map(((poll && poll.ranks) || []).map((r) => [r.teamId, r.current]))
+  const otherTeam = PROGRAMS.find((p) => p !== team)
 
   return (
     <Shell updatedAt={updatedAt} share={buildShareLine(team, schedule)}>
@@ -121,9 +125,21 @@ export default function App() {
         {tab === 'Season' && (
           <>
             <Hero team={team} schedule={schedule} ourRank={ourRank} rec={rec} />
+            <SeasonChart key={team} schedule={schedule} rec={rec} ranks={pollRanks} />
             {/* The recap lives up top: it's the first thing a reader wants
                 the morning after, not something to find under 33 rows. */}
             <LastGame team={team} games={gamesPlayed} />
+            <Storylines
+              team={team}
+              schedule={schedule}
+              poll={poll}
+              rec={rec}
+              other={{ team: otherTeam, ...data[otherTeam] }}
+              onSwitch={(next) => {
+                selectTeam(next)
+                document.querySelector('.programs').scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }}
+            />
             <Pulse team={team} rec={rec} />
             <Standings team={team} entries={standings} />
             <Rankings poll={poll} schedule={schedule} />
