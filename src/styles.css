@@ -327,6 +327,7 @@ a.sponsorband:hover {
 }
 
 .program {
+  position: relative; /* anchors the visually-hidden radio inside its label */
   flex: 1;
   text-align: center;
   font-family: var(--display);
@@ -574,7 +575,9 @@ input:focus-visible {
 /* ----------------------------------------------------------------- pulse */
 .pulse {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  /* Fixed 4 across (2 on phones) with an even cell count from Pulse.jsx —
+     auto-fit left a lone cell beside a gray gap. */
+  grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   background: var(--line);
   border: 1.5px solid var(--ink);
@@ -785,6 +788,72 @@ input:focus-visible {
   color: var(--ink-soft);
 }
 
+/* Schedule structure: stacked dates, month headers, the next-game flag. */
+.game .game__when {
+  display: flex;
+  flex-direction: column;
+}
+
+.game__date {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.slate__month {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cardinal);
+  margin: 14px 0 0;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.slate__month:first-child {
+  margin-top: 0;
+}
+
+.game--next {
+  box-shadow: 0 0 0 3px var(--cardinal);
+}
+
+.tag.tag--next {
+  margin: 0 6px 0 0;
+  background: var(--cardinal);
+  border-color: var(--cardinal);
+  color: var(--white);
+}
+
+.game__nologo {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--cream);
+  font-family: var(--mono);
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  overflow: hidden;
+}
+
+.slate__jump {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cardinal);
+  text-decoration: none;
+}
+
+.slate__jump:hover {
+  text-decoration: underline;
+}
+
 /* ---------------------------------------------------- hockey additions */
 .linescore th.num,
 .linescore td.num {
@@ -818,6 +887,13 @@ input:focus-visible {
   color: var(--ink-soft);
 }
 
+.roster__more {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 10px 0 0;
+}
+
+.roster__more a,
 .emptynote a {
   color: var(--cardinal);
   font-weight: 700;
@@ -1148,12 +1224,22 @@ input:focus-visible {
 }
 
 @media (max-width: 560px) {
+  .pulse {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .game {
     grid-template-columns: 1fr auto;
   }
 
   .game__when {
     grid-column: 1 / -1;
+  }
+
+  /* On phones the date sits on its own row: one line, not a stack. */
+  .game .game__when {
+    flex-direction: row;
+    gap: 8px;
   }
 
   /* Wrapped strip rows: space-between scatters a short last row across the

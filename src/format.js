@@ -43,3 +43,11 @@ export function resultLine(game) {
 }
 
 export const vsAt = (game) => (game.homeAway === 'home' || game.neutralSite ? 'vs' : 'at')
+
+// "Frozen Tundra Faceoff · Lambeau Field · Green Bay" — the event name (if
+// any) never replaces the venue: a named game is usually somewhere unusual.
+export function whereLine(game) {
+  return [game.note, game.venue && game.venue.name, game.venue && game.venue.city]
+    .filter(Boolean)
+    .join(' · ')
+}

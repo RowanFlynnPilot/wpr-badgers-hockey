@@ -70,7 +70,8 @@ export default function LastGame({ team, games }) {
                     {periodLabel(i + 1)}
                   </th>
                 ))}
-                <th className="num">T</th>
+                {/* "F" (final), not the box-score "T" — T means tie here */}
+                <th className="num">F</th>
               </tr>
             </thead>
             <tbody>

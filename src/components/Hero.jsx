@@ -73,7 +73,7 @@ export default function Hero({ team, schedule, ourRank, rec }) {
           <span className="hero__score" aria-live="polite">
             {live.us.score}–{live.them.score}
           </span>
-          <TeamChip team={live.them} />
+          <TeamChip team={{ ...live.them, name: live.them.short }} />
         </div>
         <div className="hero__meta">
           {venueLine(live)}
@@ -93,7 +93,7 @@ export default function Hero({ team, schedule, ourRank, rec }) {
           {[
             next.note,
             series ? `Weekend series · game ${series.index} of ${series.of}` : '',
-            homeRink ? program.arena : venueLine(next),
+            homeRink ? (next.venue && next.venue.name) || program.arena : venueLine(next),
           ]
             .filter(Boolean)
             .join(' · ')}
@@ -102,19 +102,13 @@ export default function Hero({ team, schedule, ourRank, rec }) {
         <div className="hero__matchup">
           <TeamChip team={us(next)} />
           <span className="hero__vs">{vsAt(next).toUpperCase()}</span>
-          <TeamChip team={next.them} />
+          <TeamChip team={{ ...next.them, name: next.them.short }} />
         </div>
         <div className="hero__meta">
           {gameDate(next, { weekday: 'short', month: 'short', day: 'numeric' })}
           {time ? `, ${time} ${CONFIG.TIMEZONE_LABEL}` : ' · time TBA'}
           {next.tv && ` · ${next.tv}`}
         </div>
-        {last && (
-          <div className="hero__meta" style={{ marginTop: 10 }}>
-            Last time out: {resultLine(last)} {vsAt(last)} {last.them.short}
-            {rec && rec.played ? ` · ${fmt(rec.overall)} overall` : ''}
-          </div>
-        )}
       </div>
     )
   }

@@ -121,6 +121,9 @@ export default function App() {
         {tab === 'Season' && (
           <>
             <Hero team={team} schedule={schedule} ourRank={ourRank} rec={rec} />
+            {/* The recap lives up top: it's the first thing a reader wants
+                the morning after, not something to find under 33 rows. */}
+            <LastGame team={team} games={gamesPlayed} />
             <Pulse team={team} rec={rec} />
             <Standings team={team} entries={standings} />
             <Rankings poll={poll} schedule={schedule} />
@@ -130,7 +133,6 @@ export default function App() {
         {tab === 'Schedule' && (
           <>
             <Schedule team={team} games={schedule} conferenceIds={conferenceIds} />
-            <LastGame team={team} games={gamesPlayed} />
           </>
         )}
 
@@ -150,12 +152,10 @@ function TeamTab({ team }) {
       <Roster team={team} onEmpty={() => setEmpty(true)} />
       {empty && (
         <p className="emptynote">
-          ESPN doesn't publish a {CONFIG.TEAMS[team].label.toLowerCase()} roster
-          yet. The full roster lives at{' '}
-          <a href="https://uwbadgers.com" target="_blank" rel="noopener">
-            uwbadgers.com
+          ESPN doesn't publish a {CONFIG.TEAMS[team].label.toLowerCase()} roster.{' '}
+          <a href={CONFIG.TEAMS[team].rosterUrl} target="_blank" rel="noopener">
+            See the full roster on uwbadgers.com →
           </a>
-          .
         </p>
       )}
     </>

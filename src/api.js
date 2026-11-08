@@ -61,16 +61,26 @@ function normalizeEvent(event) {
   const usScore = us.score ? Number(us.score.value) : null
   const themScore = them.score ? Number(them.score.value) : null
   const completed = status.type.completed
+  const note =
+    comp.notes && comp.notes.length && comp.notes[0].headline ? comp.notes[0].headline : ''
   return {
     id: event.id,
     date: new Date(comp.date),
     timeValid: comp.timeValid !== false,
-    // Tournament games (conference playoffs, NCAA regionals, Frozen Four)
-    // carry their name here; empty for regular-season games.
-    note:
-      comp.notes && comp.notes.length && comp.notes[0].headline
-        ? comp.notes[0].headline
-        : '',
+    // Named games carry their name here: holiday tournaments ("Kwik Trip
+    // Holiday Face-Off"), showcase events ("Frozen Tundra Faceoff" — a
+    // CONFERENCE game at Lambeau), conference playoffs ("WCHA - Semifinal")
+    // and NCAA games. A note alone does NOT mean postseason — see below.
+    note,
+    // Postseason = ESPN's seasonType 3 (NCAA tournament) or a conference-
+    // playoff round, which ESPN files under the regular season with a
+    // "<Conference> - Quarterfinal/Semifinal/Final" note. Postseason games
+    // don't count toward the conference record.
+    postseason:
+      (event.seasonType && event.seasonType.type === 3) ||
+      /\b(First Round|Opening Round|Quarterfinals?|Semifinals?|Finals?|Championship)\b/i.test(
+        note,
+      ),
     homeAway: us.homeAway, // 'home' | 'away'
     neutralSite: Boolean(comp.neutralSite),
     venue: comp.venue
@@ -179,6 +189,10 @@ export function fetchPoll(team) {
     if (!poll) throw new Error(`No ${CONFIG.SEASON} USCHO poll yet`)
     return {
       name: poll.name,
+      // "Week 6" from "2027 USCHO Men's Poll: Week 6"; records in the poll
+      // are as of this release, not today — the table says so.
+      week: ((poll.shortHeadline || poll.headline || '').match(/Week \d+/) || [''])[0],
+      released: poll.date ? new Date(poll.date) : null,
       ranks: poll.ranks.map((r) => ({
         current: r.current,
         previous: r.previous,

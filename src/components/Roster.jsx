@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { CONFIG } from '../config.js'
 import { fetchRoster } from '../api.js'
 import Section from './Section.jsx'
 
@@ -85,6 +86,13 @@ export default function Roster({ team, onEmpty }) {
           <Group key={group.side} group={group} defaultOpen={i === 0} />
         ))}
       </div>
+      {/* ESPN's college-hockey roster is partial (20 of ~28 men listed). */}
+      <p className="roster__more">
+        ESPN lists {groups.reduce((n, g) => n + g.players.length, 0)} players.{' '}
+        <a href={CONFIG.TEAMS[team].rosterUrl} target="_blank" rel="noopener">
+          Full roster on uwbadgers.com →
+        </a>
+      </p>
     </Section>
   )
 }

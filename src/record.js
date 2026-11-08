@@ -1,7 +1,8 @@
 // Wisconsin's records, computed from its own results. ESPN's hockey
 // standings have no conference record (see api.js), so the conference line
-// is derived here: games vs conference members that aren't tournament games
-// (a `note` marks conference playoffs / NCAA games, which don't count).
+// is derived here: regular-season games vs conference members. Conference
+// playoffs and NCAA games (`postseason`) don't count; named regular-season
+// events like the Frozen Tundra Faceoff at Lambeau DO.
 
 const tally = (games) => {
   const n = (r) => games.filter((g) => g.result === r).length
@@ -13,7 +14,7 @@ export const fmt = ({ w, l, t }) => `${w}–${l}–${t}`
 export function records(schedule, conferenceIds) {
   const played = schedule.filter((g) => g.completed)
   const conf = conferenceIds
-    ? played.filter((g) => conferenceIds.has(g.them.id) && !g.note)
+    ? played.filter((g) => conferenceIds.has(g.them.id) && !g.postseason)
     : []
   const home = played.filter((g) => g.homeAway === 'home' && !g.neutralSite)
   const away = played.filter((g) => g.homeAway === 'away' && !g.neutralSite)
@@ -39,5 +40,6 @@ export function records(schedule, conferenceIds) {
     streak,
     gfPerGame: played.length ? goalsFor / played.length : 0,
     gaPerGame: played.length ? goalsAgainst / played.length : 0,
+    goalDiff: goalsFor - goalsAgainst,
   }
 }

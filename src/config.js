@@ -24,16 +24,20 @@ export const CONFIG = {
       conference: 'Big Ten',
       conferenceIds: null,
       arena: 'Kohl Center',
+      rosterUrl: 'https://uwbadgers.com/sports/mens-ice-hockey/roster',
       newsCategory: null,
     },
     womens: {
       label: "Women's",
       league: 'womens-college-hockey',
       conference: 'WCHA',
-      conferenceIds: ['132', '134', '135', '2364', '194', '2594', '2900', '275'],
+      conferenceIds: ['132', '134', '135', '24059', '194', '2594', '2900', '275'],
       // Bemidji St, Minnesota Duluth, Minnesota, Minnesota St, Ohio St,
-      // St. Cloud St, St. Thomas, Wisconsin
+      // St. Cloud St, St. Thomas, Wisconsin. Verify ids against the
+      // STANDINGS/schedule feeds, not /teams: the teams directory lists a
+      // stale Minnesota State (2364); the live women's program is 24059.
       arena: 'LaBahn Arena',
+      rosterUrl: 'https://uwbadgers.com/sports/womens-ice-hockey/roster',
       newsCategory: null,
     },
   },

@@ -10,6 +10,7 @@ export default function Pulse({ team, rec }) {
   if (!rec || !rec.played) return null
   const program = CONFIG.TEAMS[team]
 
+  const diff = rec.goalDiff
   const cells = [[fmt(rec.overall), 'Overall']]
   if (rec.conf && rec.confPlayed) cells.push([fmt(rec.conf), program.conference])
   cells.push(
@@ -17,8 +18,12 @@ export default function Pulse({ team, rec }) {
     [fmt(rec.away), 'Road'],
     [rec.gfPerGame.toFixed(2), 'Goals for / game'],
     [rec.gaPerGame.toFixed(2), 'Goals against / game'],
+    [`${diff > 0 ? '+' : ''}${diff}`, 'Goal differential'],
     [rec.streak, 'Streak'],
   )
+  // The grid is 4 across (2 on phones): keep the count even so no cell
+  // ever sits alone on a row — before conference play starts there are 7.
+  if (cells.length % 2) cells.splice(1, 0, [String(rec.played), 'Games played'])
 
   return (
     <Section title="Season pulse" sub="Records read W–L–T.">

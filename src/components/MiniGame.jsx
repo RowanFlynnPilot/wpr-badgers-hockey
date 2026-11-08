@@ -3,7 +3,7 @@ import { CONFIG } from '../config.js'
 import { fetchSchedule } from '../api.js'
 import { destination } from '../embed.js'
 import { track } from '../analytics.js'
-import { gameDate, gameTime, liveLabel, vsAt } from '../format.js'
+import { gameDate, gameTime, liveLabel, vsAt, whereLine } from '../format.js'
 import { seriesInfo } from './Hero.jsx'
 import Sponsor from './Sponsor.jsx'
 
@@ -117,15 +117,7 @@ export default function MiniGame() {
   const schedule = schedules[team]
   const series = state === 'pre' ? seriesInfo(schedule, game) : null
   const pill = state === 'pre' ? countdown(game, now) : null
-  const venue =
-    state === 'pre'
-      ? game.note ||
-        (game.homeAway === 'home' && !game.neutralSite
-          ? program.arena
-          : game.venue
-            ? [game.venue.name, game.venue.city].filter(Boolean).join(' · ')
-            : '')
-      : ''
+  const venue = state === 'pre' ? whereLine(game) : ''
   const resultWord = final ? { W: 'Badgers win', L: 'Final', T: 'Tie' }[game.result] : null
 
   return (

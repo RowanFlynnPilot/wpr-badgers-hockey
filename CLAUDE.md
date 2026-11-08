@@ -43,6 +43,16 @@ public/embed.js  ← optional host resize script (only usable on WPR if
   = `status.period > 3` ("Final/OT"). Shootouts are NOT exposed — a
   shootout game stays a tie, as in the NCAA record.
 - `conferenceCompetition` is absent from schedule events.
+- **A `note` does NOT mean postseason.** Named regular-season events carry
+  notes too — holiday tournaments ("Kwik Trip Holiday Face-Off") and the
+  **Frozen Tundra Faceoff at Lambeau (Feb 2027), a CONFERENCE game for both
+  programs** (men vs Michigan, women vs Ohio State). `postseason` =
+  `event.seasonType.type === 3` (NCAA) OR a conference-playoff note
+  ("WCHA - Semifinal", "Big Ten - Quarterfinal" — filed under seasonType 2).
+  Only postseason games are excluded from the conference record.
+- **Verify team ids against the standings/schedule feeds, never `/teams`:**
+  the women's teams directory lists a stale Minnesota State (2364); the live
+  program is **24059**. A wrong id silently drops a team from the WCHA table.
 - **Standings carry OVERALL records only** (`total` = "W-L-T",
   `winpercent`); no conference record, `points` always 0. Men's standings
   have conference `children` (find the one containing 275 → Big Ten).
@@ -55,8 +65,9 @@ public/embed.js  ← optional host resize script (only usable on WPR if
 - Summaries have **no plays, goal log or box stats** — only
   `header.competitions[0].competitors[].linescores` (goals per period).
 - **Women's roster is EMPTY on ESPN** (`athletes: []`); men's is a flat list
-  (F/D/G) with `experience.years` only (no class abbreviation). The Team tab
-  shows a note pointing to uwbadgers.com when empty.
+  (F/D/G) with `experience.years` only (no class abbreviation), and it's
+  PARTIAL (20 of ~28). Both Team tabs link `CONFIG.TEAMS.*.rosterUrl`
+  (uwbadgers.com) for the full roster.
 - Team objects carry no `color` and no `record` for hockey.
 
 ## WPR embed constraint
