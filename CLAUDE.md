@@ -59,7 +59,7 @@ public/embed.js  ← optional host resize script (only usable on WPR if
   **Women's standings are one flat national list with no conference
   groups**, and the core API's women's group is just "NCAA Women's Hockey" —
   so WCHA membership is `CONFIG.TEAMS.womens.conferenceIds`. Conference
-  records are computed in record.js (non-`note` games vs members).
+  records are computed in record.js (non-`postseason` games vs members).
 - Polls: `/rankings` → "USCHO Men's Poll" (20) / "USCHO Women's Poll" (15);
   api.js refuses a poll whose `season.year !== CONFIG.SEASON`.
 - Summaries have **no plays, goal log or box stats** — only
